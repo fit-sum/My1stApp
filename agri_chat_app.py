@@ -1,130 +1,47 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 7,
-   "id": "549adad8-3b81-4a26-9933-f1fdcf3f4398",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "2025-05-22 14:26:34.039 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.039 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.040 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.040 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.041 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.041 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.041 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.042 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.043 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.043 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.044 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.044 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.044 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.044 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.045 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.045 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.045 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.046 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.046 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.046 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.046 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.047 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.047 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.047 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.048 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.048 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.048 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.048 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.049 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.049 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.049 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.050 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.050 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-05-22 14:26:34.050 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
-     ]
-    }
-   ],
-   "source": [
-    "import streamlit as st\n",
-    "import openai\n",
-    "import os\n",
-    "\n",
-    "# 🔐 Securely set your OpenAI API key (recommended via Streamlit secrets or environment variable)\n",
-    "# openai.api_key = st.secrets[\"openai_api_key\"]  # preferred for deployment\n",
-    "openai.api_key = \"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\"\n",
-    "\n",
-    "# Page title and layout\n",
-    "st.set_page_config(page_title=\"AgriChat Assistant\", layout=\"centered\")\n",
-    "st.title(\"🌾 AgriChat Assistant\")\n",
-    "st.write(\"Ask questions and get personalized farming advice powered by ChatGPT.\")\n",
-    "\n",
-    "# User inputs\n",
-    "crop = st.text_input(\"🌱 Crop Type\", \"Maize\")\n",
-    "soil_properties = st.text_area(\"🧪 Soil Properties\", \"pH: 6.5, Organic Matter: Medium, Texture: Loam\")\n",
-    "location = st.text_input(\"📍Location (optional)\", \"Ethiopia\")\n",
-    "question = st.text_area(\"❓Your Farming Question\", \"What type of fertilizer should I use?\")\n",
-    "\n",
-    "# Button logic\n",
-    "if st.button(\"Get Recommendation\"):\n",
-    "    with st.spinner(\"Analyzing and generating response...\"):\n",
-    "        prompt = (\n",
-    "            f\"You are an expert agricultural advisor.\\n\"\n",
-    "            f\"Crop: {crop}\\n\"\n",
-    "            f\"Soil Properties: {soil_properties}\\n\"\n",
-    "            f\"Location: {location}\\n\"\n",
-    "            f\"Question: {question}\\n\"\n",
-    "            f\"Provide a concise, practical, and research-based recommendation.\"\n",
-    "        )\n",
-    "\n",
-    "        try:\n",
-    "            response = openai.ChatCompletion.create(\n",
-    "                model=\"gpt-4\",\n",
-    "                messages=[\n",
-    "                    {\"role\": \"system\", \"content\": \"You are an expert agronomist specializing in soil and crop management.\"},\n",
-    "                    {\"role\": \"user\", \"content\": prompt}\n",
-    "                ],\n",
-    "                temperature=0.7,\n",
-    "                max_tokens=500\n",
-    "            )\n",
-    "            reply = response['choices'][0]['message']['content']\n",
-    "            st.success(\"✅ Recommendation:\")\n",
-    "            st.write(reply)\n",
-    "\n",
-    "        except Exception as e:\n",
-    "            st.error(f\"❌ Error: {str(e)}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": None,
-   "id": "c8b78f0d-3c2f-42c9-aa72-bf3eb9bc3441",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3.9 (Default)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.9.13"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+import streamlit as st
+import openai
+import os
+
+# 🔐 Securely set your OpenAI API key (recommended via Streamlit secrets or environment variable)
+# openai.api_key = st.secrets["openai_api_key"]  # preferred for deployment
+openai.api_key = "sk-..."
+
+# Page title and layout
+st.set_page_config(page_title="AgriChat Assistant", layout="centered")
+st.title("🌾 AgriChat Assistant")
+st.write("Ask questions and get personalized farming advice powered by ChatGPT.")
+
+# User inputs
+crop = st.text_input("🌱 Crop Type", "Maize")
+soil_properties = st.text_area("🧪 Soil Properties", "pH: 6.5, Organic Matter: Medium, Texture: Loam")
+location = st.text_input("📍Location (optional)", "Ethiopia")
+question = st.text_area("❓Your Farming Question", "What type of fertilizer should I use?")
+
+# Button logic
+if st.button("Get Recommendation"):
+    with st.spinner("Analyzing and generating response..."):
+        prompt = (
+            f"You are an expert agricultural advisor.\n"
+            f"Crop: {crop}\n"
+            f"Soil Properties: {soil_properties}\n"
+            f"Location: {location}\n"
+            f"Question: {question}\n"
+            f"Provide a concise, practical, and research-based recommendation."
+        )
+
+        try:
+            response = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "You are an expert agronomist specializing in soil and crop management."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.7,
+                max_tokens=500
+            )
+            reply = response['choices'][0]['message']['content']
+            st.success("✅ Recommendation:")
+            st.write(reply)
+
+        except Exception as e:
+            st.error(f"❌ Error: {str(e)}")
